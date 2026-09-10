@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { ArrowRight, CheckCircle2, Gauge, Layers, Ruler, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, Gauge, Sparkles } from "lucide-react";
 
 import heroImg from "@/assets/vmc-hero.jpg";
 import grindingImg from "@/assets/grinding.jpg";
@@ -132,49 +132,7 @@ function Home() {
         </Reveal>
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
-          <Reveal className="md:col-span-2">
-            <MagicCard className="h-full p-0">
-              <img
-                src={toolroomImg}
-                alt="Tool room with conventional milling and lathe machines"
-                loading="lazy"
-                width={1200}
-                height={912}
-                className="h-56 w-full object-cover opacity-90 md:h-72"
-              />
-              <div className="p-7">
-                <Ruler className="h-5 w-5 text-primary" />
-                <h3 className="mt-4 text-xl font-semibold">Tool room job work</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  Conventional milling, turning and fitting support for tool rooms and maintenance
-                  departments, with quick turnaround on repair and rework jobs.
-                </p>
-              </div>
-            </MagicCard>
-          </Reveal>
-
-          <Reveal delay={0.08}>
-            <MagicCard className="h-full p-0">
-              <img
-                src={heroImg}
-                alt="FANUC-controlled VMC machining a steel component"
-                loading="lazy"
-                width={1200}
-                height={912}
-                className="h-56 w-full object-cover opacity-90 md:h-72"
-              />
-              <div className="p-7">
-                <Layers className="h-5 w-5 text-primary" />
-                <h3 className="mt-4 text-xl font-semibold">VMC machining</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  FANUC-controlled vertical machining centres for tight-tolerance components, from
-                  prototypes to batch runs.
-                </p>
-              </div>
-            </MagicCard>
-          </Reveal>
-
-          {SERVICES.slice(0, 3).map((s, i) => (
+          {SERVICES.filter((s) => s.slug !== "vmc" && s.slug !== "toolroom").map((s, i) => (
             <Reveal key={s.slug} delay={0.04 * i}>
               <MagicCard className="h-full p-7">
                 <Gauge className="h-5 w-5 text-primary" />

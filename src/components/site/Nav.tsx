@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, User, Wrench, Images, QrCode, Download } from "lucide-react";
+import { Menu, X, Home, User, Wrench, Images, QrCode, Download } from "lucide-react";
 import { Logo } from "./Logo";
 import { usePwaInstall } from "@/hooks/usePwaInstall";
 
 const links = [
+  { to: "/", label: "Home", icon: Home },
   { to: "/director", label: "Director", icon: User },
   { to: "/services", label: "Services", icon: Wrench },
   { to: "/gallery", label: "Gallery", icon: Images },
@@ -31,18 +32,11 @@ export function Nav() {
           </Link>
 
           <nav className="hidden items-center gap-1 md:flex">
-            <Link
-              to="/"
-              activeOptions={{ exact: true }}
-              activeProps={{ className: "text-foreground bg-secondary/70" }}
-              className="rounded-full px-3.5 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Home
-            </Link>
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
+                activeOptions={{ exact: l.to === "/" }}
                 activeProps={{ className: "text-foreground bg-secondary/70" }}
                 className="rounded-full px-3.5 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
@@ -114,9 +108,6 @@ export function Nav() {
           </nav>
 
           <div className="mt-auto flex flex-col gap-1 border-t border-border pt-4 text-sm text-muted-foreground">
-            <Link to="/" onClick={() => setOpen(false)} className="px-3 py-2 hover:text-foreground">
-              Home
-            </Link>
             <Link to="/about" onClick={() => setOpen(false)} className="px-3 py-2 hover:text-foreground">
               About
             </Link>

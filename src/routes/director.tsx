@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Instagram, Facebook, MessageCircle, Mail, Phone } from "lucide-react";
 
-import directorImg from "@/assets/director.jpg.asset.json";
 import { Reveal } from "@/components/fx/Reveal";
 import { Spotlight } from "@/components/fx/Spotlight";
 import { COMPANY } from "@/data/site";
@@ -28,7 +27,7 @@ export const Route = createFileRoute("/director")({
 
 function Director() {
   const { data: settings } = useSiteSettings();
-  const photo = settings?.["director_image_url"] || directorImg.url;
+  const photo = settings?.["director_image_url"] || "/pwa-512.png";
   const phone = COMPANY.phones[0]!;
 
   const socials = [

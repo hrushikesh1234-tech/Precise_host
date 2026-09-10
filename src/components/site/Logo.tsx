@@ -1,10 +1,8 @@
-import logo from "@/assets/logo.jpg.asset.json";
-
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <span className={`flex items-center gap-2.5 ${className}`}>
       <span className="grid h-9 w-9 place-items-center overflow-hidden rounded-lg bg-white">
-        <img src={logo.url} alt="Precise Industries logo" className="h-9 w-9 object-contain" />
+        <img src="/pwa-192.png" alt="Precise Industries logo" className="h-9 w-9 object-contain" />
       </span>
       <span className="font-display text-[15px] font-semibold leading-none tracking-tight">
         Precise
