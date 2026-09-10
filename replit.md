@@ -17,6 +17,8 @@ npm run build
 
 The Vite configuration uses Nitro's Vercel preset, so the production build is emitted to `.vercel/output` for Vercel's deployment output API.
 
+The intended production domain is `https://preciseindustries.shop`.
+
 ## Environment variables
 
 The public site needs:
