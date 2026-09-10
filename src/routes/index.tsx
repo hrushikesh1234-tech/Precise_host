@@ -131,16 +131,37 @@ function Home() {
           </p>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {SERVICES.filter((s) => s.slug !== "vmc" && s.slug !== "toolroom").map((s, i) => (
-            <Reveal key={s.slug} delay={0.04 * i}>
-              <MagicCard className="h-full p-7">
-                <Gauge className="h-5 w-5 text-primary" />
-                <h3 className="mt-4 text-lg font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.summary}</p>
-              </MagicCard>
-            </Reveal>
-          ))}
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {SERVICES.map((s, i) => {
+            const backgroundImage =
+              s.slug === "vmc"
+                ? heroImg
+                : s.slug === "toolroom"
+                  ? toolroomImg
+                  : s.slug === "die-mould"
+                    ? chromeImg
+                    : grindingImg;
+
+            return (
+              <Reveal key={s.slug} delay={0.04 * i}>
+                <MagicCard className="h-full min-h-64 p-7">
+                  <img
+                    src={backgroundImage}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover opacity-50"
+                  />
+                  <div className="absolute inset-0 bg-background/45" aria-hidden="true" />
+                  <div className="relative">
+                    <Gauge className="h-5 w-5 text-primary" />
+                    <h3 className="mt-4 text-lg font-semibold">{s.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.summary}</p>
+                  </div>
+                </MagicCard>
+              </Reveal>
+            );
+          })}
         </div>
 
         <Reveal className="mt-8">
