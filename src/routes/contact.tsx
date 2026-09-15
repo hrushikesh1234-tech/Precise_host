@@ -6,6 +6,7 @@ import { MagicCard } from "@/components/fx/MagicCard";
 import { Reveal } from "@/components/fx/Reveal";
 import { Spotlight } from "@/components/fx/Spotlight";
 import { COMPANY, SERVICES } from "@/data/site";
+import { useResolvedSiteSettings } from "@/hooks/useSiteSettings";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -19,7 +20,8 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: "Contact Precise Industries" },
       {
         property: "og:description",
-        content: "Request a quotation for precision machining, grinding or hard chrome plating in Pune.",
+        content:
+          "Request a quotation for precision machining, grinding or hard chrome plating in Pune.",
       },
     ],
   }),
@@ -27,6 +29,9 @@ export const Route = createFileRoute("/contact")({
 });
 
 function Contact() {
+  const { settings } = useResolvedSiteSettings();
+  const email = settings["email_address"] || COMPANY.email;
+  const phone = settings["mobile_number"] || COMPANY.phones[0]!;
   const [form, setForm] = useState({
     name: "",
     company: "",
@@ -45,7 +50,7 @@ function Contact() {
       "",
       form.message,
     ].join("\n");
-    window.location.href = `mailto:${COMPANY.email}?subject=${encodeURIComponent(
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(
       `Enquiry from ${form.company || form.name}`,
     )}&body=${encodeURIComponent(body)}`;
   };
@@ -60,11 +65,12 @@ function Contact() {
         <Spotlight />
         <div className="relative mx-auto max-w-6xl px-5 py-20">
           <h1 className="max-w-3xl text-4xl font-semibold md:text-5xl">
-            Send a drawing, get a <span className="text-gradient">method and a date</span>
+            Send a drawing, get a{" "}
+            <span className="text-gradient">method and a date</span>
           </h1>
           <p className="mt-5 max-w-xl text-muted-foreground">
-            Tell us the material, tolerance and quantity. We usually respond with a quotation within
-            24–48 hours.
+            Tell us the material, tolerance and quantity. We usually respond
+            with a quotation within 24–48 hours.
           </p>
         </div>
       </section>
@@ -85,7 +91,9 @@ function Contact() {
                   className={field}
                   placeholder="Company"
                   value={form.company}
-                  onChange={(e) => setForm({ ...form, company: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, company: e.target.value })
+                  }
                 />
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -99,10 +107,16 @@ function Contact() {
                 <select
                   className={field}
                   value={form.service}
-                  onChange={(e) => setForm({ ...form, service: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, service: e.target.value })
+                  }
                 >
                   {SERVICES.map((s) => (
-                    <option key={s.slug} value={s.title} className="bg-background">
+                    <option
+                      key={s.slug}
+                      value={s.title}
+                      className="bg-background"
+                    >
                       {s.title}
                     </option>
                   ))}
@@ -123,7 +137,8 @@ function Contact() {
                 Send enquiry <Send className="h-4 w-4" />
               </button>
               <p className="text-xs text-muted-foreground">
-                This opens your email app with the details filled in, addressed to our inbox.
+                This opens your email app with the details filled in, addressed
+                to our inbox.
               </p>
             </form>
           </MagicCard>
@@ -135,30 +150,35 @@ function Contact() {
               <Phone className="h-5 w-5 text-primary" />
               <h2 className="mt-3 font-semibold">Call us</h2>
               <div className="mt-2 flex flex-col gap-1 text-sm text-muted-foreground">
-                {COMPANY.phones.map((p) => (
-                  <a key={p} href={`tel:${p.replace(/\s/g, "")}`} className="hover:text-foreground">
-                    {p}
-                  </a>
-                ))}
+                <a
+                  href={`tel:${phone.replace(/\s/g, "")}`}
+                  className="hover:text-foreground"
+                >
+                  {phone}
+                </a>
               </div>
             </MagicCard>
             <MagicCard className="p-6">
               <Mail className="h-5 w-5 text-primary" />
               <h2 className="mt-3 font-semibold">Email</h2>
               <a
-                href={`mailto:${COMPANY.email}`}
+                href={`mailto:${email}`}
                 className="mt-2 block break-all text-sm text-muted-foreground hover:text-foreground"
               >
-                {COMPANY.email}
+                {email}
               </a>
             </MagicCard>
             <MagicCard className="p-6">
               <MapPin className="h-5 w-5 text-primary" />
               <h2 className="mt-3 font-semibold">Works address</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{COMPANY.address}</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {settings["company_address"]}
+              </p>
               <div className="mt-4 text-sm">
-                <div className="font-medium">{COMPANY.contactPerson.name}</div>
-                <div className="text-muted-foreground">{COMPANY.contactPerson.role}</div>
+                <div className="font-medium">{settings["director_name"]}</div>
+                <div className="text-muted-foreground">
+                  {settings["director_role"]}
+                </div>
               </div>
             </MagicCard>
           </div>

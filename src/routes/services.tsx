@@ -10,17 +10,20 @@ import { CAPABILITIES, SERVICES } from "@/data/site";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services — VMC, Tool Room, Grinding & Hard Chrome Plating | Precise Industries" },
+      {
+        title:
+          "Services — VMC, Grinding & Hard Chrome Plating | Precise Industries",
+      },
       {
         name: "description",
         content:
-          "Precision machining services in Pune: VMC machining, tool room job work, grinding to 0.002 mm, hard chrome plating 50–1000 microns, die and mould components.",
+          "Precision machining services in Pune: VMC machining, grinding to 0.002 mm, hard chrome plating 50–1000 microns, and die and mould components.",
       },
       { property: "og:title", content: "Services | Precise Industries" },
       {
         property: "og:description",
         content:
-          "VMC machining, tool room job work, precision grinding and in-house hard chrome plating from a Pune facility.",
+          "VMC machining, precision grinding, die and mould components, and in-house hard chrome plating from a Pune facility.",
       },
     ],
   }),
@@ -35,11 +38,12 @@ function Services() {
         <Spotlight />
         <div className="relative mx-auto max-w-6xl px-5 py-20">
           <h1 className="max-w-3xl text-4xl font-semibold md:text-5xl">
-            Services built around <span className="text-gradient">tolerance, finish and dates</span>
+            Services built around{" "}
+            <span className="text-gradient">tolerance, finish and dates</span>
           </h1>
           <p className="mt-5 max-w-xl text-muted-foreground">
-            Every process below runs inside our 5000+ sq. ft. facility in Talawade, Pune, with a team of
-            10+ skilled machinists and operators.
+            Every process below runs inside our 5000+ sq. ft. facility in
+            Talawade, Pune, with a team of 10+ skilled machinists and operators.
           </p>
         </div>
       </section>
@@ -53,10 +57,15 @@ function Services() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h2 className="mt-3 text-xl font-semibold">{s.title}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.summary}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {s.summary}
+                </p>
                 <ul className="mt-5 space-y-2">
                   {s.points.map((p) => (
-                    <li key={p} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <li
+                      key={p}
+                      className="flex items-center gap-2 text-sm text-muted-foreground"
+                    >
                       <Check className="h-4 w-4 shrink-0 text-primary" />
                       {p}
                     </li>
@@ -71,7 +80,9 @@ function Services() {
       <section className="mx-auto max-w-6xl px-5 pb-16">
         <div className="grid gap-8 md:grid-cols-2 md:items-center">
           <Reveal>
-            <h2 className="text-3xl font-semibold md:text-4xl">In-house capabilities</h2>
+            <h2 className="text-3xl font-semibold md:text-4xl">
+              In-house capabilities
+            </h2>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {CAPABILITIES.map((c) => (
                 <li
